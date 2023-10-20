@@ -1,0 +1,16 @@
+bash-5.0# awscurl --region eu-west-1 --service neptune-db https://cloudia-nep-dev.cluster-cvkdx3b53k0f.eu-west-1.neptune.amazonaws.com:8182/gremlin/stream?iteratorType=TRIM_HORIZON
+
+
+{"lastEventId":{"commitNum":185961,"opNum":3},
+
+
+"lastTrxTimestamp":1677142022861,"format":"GREMLIN_JSON","records":[{"eventId":{"commitNum":185959,"opNum":1},"data":{"id":"c2c33eba-2d60-178f-1aca-5b332cade12a","type":"vl","key":"label","value":{"value":"CustomDestination","dataType":"String"}},"op":"ADD"},{"eventId":{"commitNum":185959,"opNum":2},"data":{"id":"c2c33eba-2d60-178f-1aca-5b332cade12a","type":"vp","key":"tenantId","value":{"value":"7adab3af-f7a9-49e7-9b76-4039292d780e","dataType":"String"}},"op":"ADD"},{"eventId":{"commitNum":185960,"opNum":1},"data":{"id":"9ac33eba-2d63-4fe3-fbaa-2b15c61ab16a","type":"vl","key":"label","value":{"value":"CustomDestinationState","dataType":"String"}},"op":"ADD"},{"eventId":{"commitNum":185960,"opNum":2},"data":{"id":"9ac33eba-2d63-4fe3-fbaa-2b15c61ab16a","type":"vp","key":"tenantId","value":{"value":"7adab3af-f7a9-49e7-9b76-4039292d780e","dataType":"String"}},"op":"ADD"},{"eventId":{"commitNum":185960,"opNum":3},"data":{"id":"9ac33eba-2d63-4fe3-fbaa-2b15c61ab16a","type":"vp","key":"name","value":{"value":"test1","dataType":"String"}},"op":"ADD"},{"eventId":{"commitNum":185960,"opNum":4},"data":{"id":"9ac33eba-2d63-4fe3-fbaa-2b15c61ab16a","type":"vp","key":"description","value":{"value":"","dataType":"String"}},"op":"ADD"},{"eventId":{"commitNum":185960,"opNum":5},"data":{"id":"9ac33eba-2d63-4fe3-fbaa-2b15c61ab16a","type":"vp","key":"searchName","value":{"value":"test1","dataType":"String"}},"op":"ADD"},{"eventId":{"commitNum":185961,"opNum":1},"data":{"id":"74c33eba-2d66-4682-bd67-8c3988587a30","type":"e","key":"label","value":{"value":"hasState","dataType":"String"},"from":"c2c33eba-2d60-178f-1aca-5b332cade12a","to":"9ac33eba-2d63-4fe3-fbaa-2b15c61ab16a"},"op":"ADD"},{"eventId":{"commitNum":185961,"opNum":2},"data":{"id":"74c33eba-2d66-4682-bd67-8c3988587a30","type":"ep","key":"fromSession","value":{"value":1677142022829,"dataType":"Long"}},"op":"ADD"},{"eventId":{"commitNum":185961,"opNum":3},"data":{"id":"74c33eba-2d66-4682-bd67-8c3988587a30","type":"ep","key":"toSession","value":{"value":8640000000000000,"dataType":"Long"}},"op":"ADD"}],"totalRecords":10}
+
+
+
+
+curl "https://33tbcxpxhk.execute-api.ap-south-1.amazonaws.com/v1/neptune-export"   -X POST   -H 'Content-Type: application/json'   -d '{
+        "command": "export-pg",
+        "outputS3Path": "s3://aml-ibm/neptune-export",
+        "params": { "endpoint": "aml-novac.cluster-cynihg27gl0j.ap-south-1.neptune.amazonaws.com" }
+      }'

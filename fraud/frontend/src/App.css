@@ -1,0 +1,82 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+body{
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gamepanel{
+  height: 200px;
+  border: solid 5px rgb(137, 86, 86);
+  background-color: rgb(78, 158, 78);
+  /* background-image: url('./assets/poker.png'); */
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: 30%;
+  border-radius: 2px;
+}
+
+.timer {
+  float:right !important;
+  color: greenyellow;
+  font-weight: bolder;
+}
+
+.container {
+  max-width: 95% !important;
+}
+
+.float-right{
+  float: right;
+}
+
+
+.overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 500;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}

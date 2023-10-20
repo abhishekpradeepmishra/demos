@@ -1,0 +1,93 @@
+{
+    "configurations": [
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "backend:src/handlers/getfraudrings.handler (nodejs14.x)",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "${workspaceFolder}/backend",
+                "lambdaHandler": "src/handlers/getfraudrings.handler"
+            },
+            "lambda": {
+                "runtime": "nodejs14.x",
+                "payload": {
+                    "json": {
+                        "body": "eyJ0ZXN0IjoiYm9keSJ9",
+                        "resource": "/{proxy+}",
+                        "path": "/path/to/resource",
+                        "httpMethod": "GET",
+                        "isBase64Encoded": true,
+                        "queryStringParameters": {
+                            "player1": "3e0f2626-153a-4a52-be34-fd3e1c04de0a",
+                            "player2": "aad84f79-2557-41d1-bbd8-18aa7a045549"
+                        }
+                    }
+                },
+                "environmentVariables": {
+                    "NEPTUNE_ENDPOINT": "backend.neptunedemos.com",
+                    "NEPTUNE_PORT": "443"
+                }
+            }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "backend:src/handlers/getconnection.handler (nodejs14.x)",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "${workspaceFolder}/backend",
+                "lambdaHandler": "src/handlers/getconnection.handler"
+            },
+            "lambda": {
+                "runtime": "nodejs14.x",
+                "payload": {
+                    "json": {
+                        "body": "eyJ0ZXN0IjoiYm9keSJ9",
+                        "resource": "/{proxy+}",
+                        "path": "/path/to/resource",
+                        "httpMethod": "GET",
+                        "isBase64Encoded": true,
+                        "queryStringParameters": {
+                            "player1": "3e0f2626-153a-4a52-be34-fd3e1c04de0a",
+                            "player2": "aad84f79-2557-41d1-bbd8-18aa7a045549"
+                        }
+                    }
+                },
+                "environmentVariables": {
+                    "NEPTUNE_ENDPOINT": "backend.neptunedemos.com",
+                    "NEPTUNE_PORT": "443"
+                }
+            }
+        },
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "backend:src/handlers/getgraph.handler (nodejs14.x)",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "${workspaceFolder}/backend",
+                "lambdaHandler": "src/handlers/getgraph.handler"
+            },
+            "lambda": {
+                "runtime": "nodejs14.x",
+                "payload": {
+                    "json": {
+                        "body": "eyJ0ZXN0IjoiYm9keSJ9",
+                        "resource": "/{proxy+}",
+                        "path": "/path/to/resource",
+                        "httpMethod": "GET",
+                        "isBase64Encoded": true,
+                        "queryStringParameters": {
+                            "player": "3e0f2626-153a-4a52-be34-fd3e1c04de0a"
+                        }
+                    }
+                },
+                "environmentVariables": {
+                    "NEPTUNE_ENDPOINT": "backend.neptunedemos.com",
+                    "NEPTUNE_PORT": "443"
+                }
+            }
+        }
+    ]
+}

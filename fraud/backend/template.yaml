@@ -1,0 +1,120 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  neptune-client
+Transform:
+- AWS::Serverless-2016-10-31
+
+Parameters:
+  SECURITYGROUP: 
+    NoEcho: true
+    Description: "Security Group Identifier"
+    Type: String
+  SUBNET1: 
+    Description: "Subnet 1"
+    Type: String
+  SUBNET2: 
+    Description: "Subnet 2"
+    Type: String
+  NEPTUNEENDPOINT: 
+    NoEcho: true
+    Description: "Neptune cluster endpoint"
+    Type: String
+  NEPTUNEPORT: 
+    NoEcho: true
+    Description: "Neptune cluster port"
+    Type: String
+    # Default: "443"
+    Default: "8182"
+Resources:
+    getgraph:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: src/handlers/getgraph.handler
+        Runtime: nodejs14.x
+        Architectures:
+          - x86_64
+        MemorySize: 128
+        Timeout: 100
+        Description: Get snapshot of graph from underlying Neptune database
+        Policies:
+        - NeptuneFullAccess
+        Environment:
+          Variables:
+            NEPTUNE_ENDPOINT: !Ref NEPTUNEENDPOINT
+            NEPTUNE_PORT: !Ref NEPTUNEPORT
+        VpcConfig:
+          SecurityGroupIds:
+            - sg-00610d3de99bd8b11
+          SubnetIds:
+            - subnet-0e17e373d062739c6
+            - subnet-06bbd913860ce4a68
+        Events:
+          Api:
+            Type: Api
+            Properties:
+              Path: /
+              Method: GET
+    
+    getfraudrings:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: src/handlers/getfraudrings.handler
+        Runtime: nodejs14.x
+        Architectures:
+          - x86_64
+        MemorySize: 128
+        Timeout: 100
+        Description: Detect ring arround one device identifer in the database
+        Policies:
+        - NeptuneFullAccess
+        Environment:
+          Variables:
+            NEPTUNE_ENDPOINT: !Ref NEPTUNEENDPOINT
+            NEPTUNE_PORT: !Ref NEPTUNEPORT
+        VpcConfig:
+          SecurityGroupIds:
+            - !Ref SECURITYGROUP
+          SubnetIds:
+            - !Ref SUBNET1
+            - !Ref SUBNET2
+        Events:
+          Api:
+            Type: Api
+            Properties:
+              Path: /fraudrings
+              Method: GET
+
+    getconnection:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: src/handlers/getconnection.handler
+        Runtime: nodejs14.x
+        Architectures:
+          - x86_64
+        MemorySize: 128
+        Timeout: 100
+        Description: Get connections between two user
+        Policies:
+        - NeptuneFullAccess
+        Environment:
+          Variables:
+            NEPTUNE_ENDPOINT: !Ref NEPTUNEENDPOINT
+            NEPTUNE_PORT: !Ref NEPTUNEPORT
+        VpcConfig:
+          SecurityGroupIds:
+            - !Ref SECURITYGROUP
+          SubnetIds:
+            - !Ref SUBNET1
+            - !Ref SUBNET2
+        Events:
+          Api:
+            Type: Api
+            Properties:
+              Path: /connection
+              Method: GET
+    
+
+Outputs:
+  WebEndpoint:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
