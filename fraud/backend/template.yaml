@@ -44,10 +44,10 @@ Resources:
             NEPTUNE_PORT: !Ref NEPTUNEPORT
         VpcConfig:
           SecurityGroupIds:
-            - sg-00610d3de99bd8b11
+            - !Ref SECURITYGROUP
           SubnetIds:
-            - subnet-0e17e373d062739c6
-            - subnet-06bbd913860ce4a68
+            - !Ref SUBNET1
+            - !Ref SUBNET2
         Events:
           Api:
             Type: Api
